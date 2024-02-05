@@ -1,5 +1,19 @@
 import express, { Express, Request, Response } from 'express';
 import routes from '@routes/index';
+import dataSources from './dataSource';
+
+Promise.all(
+    dataSources.map(async (dataSource, idx) => {
+        await dataSource
+            .initialize()
+            .then(() => {
+                console.log(`Data Source ${idx + 1} has been initialized!`);
+            })
+            .catch((err) => {
+                console.error(`Error during Data Source ${idx + 1} initialization:`, err);
+            });
+    })
+);
 
 const app: Express = express();
 app.use(express.json());
