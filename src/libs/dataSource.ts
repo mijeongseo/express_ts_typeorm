@@ -1,41 +1,21 @@
 import { DataSource } from 'typeorm';
 import { database } from '../config';
-import type { TDataSource } from '../config/database.config';
 
-const setDataSources = () => {
-    const dataSources = Object.values(database).map((db, idx) => {
-        const options: TDataSource = {
-            ...db,
-            logging: true,
-            synchronize: false,
-        };
-        return new DataSource(options);
-    });
+const dataSource = new DataSource(database);
 
-    return dataSources;
-};
-
-const dataSources = setDataSources();
-
-export default dataSources;
+export default dataSource;
 
 export const initializeDatabase = async () => {
-    await Promise.all(
-        dataSources.map(async (dataSource, idx) => {
-            await new Promise((resolve, reject) =>
-                dataSource
-                    .initialize()
-                    .then(() => {
-                        // console.log(`Data Source ${idx + 1} has been initialized!`);
-                        // Promise.resolve(`Data Source ${idx + 1} has been initialized!`);
-                        resolve(`Data Source ${idx + 1} has been initialized!`);
-                    })
-                    .catch((err) => {
-                        // console.error(`Error during Data Source ${idx + 1} initialization:`, err);
-                        Promise.reject(err);
-                        // reject(err);
-                    })
-            );
-        })
+    await new Promise((resolve, reject) =>
+        dataSource
+            .initialize()
+            .then(() => {
+                // console.log(`Data Source has been initialized!`);
+                resolve(`Data Source has been initialized!`);
+            })
+            .catch((err) => {
+                // console.error(`Error during Data Source ${idx + 1} initialization:`, err);
+                reject(err);
+            })
     );
 };
