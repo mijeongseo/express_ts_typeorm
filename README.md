@@ -3,8 +3,8 @@
 ## 개발 환경
 
 -   Framework : Express.js (+typescript)
--   Orm : Typerom
--   Database : Mysql
+-   Orm : TypeORM
+-   Database : MySQL
 
 ## 시작하기
 
