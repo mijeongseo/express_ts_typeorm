@@ -16,6 +16,8 @@ export const db: { [index: string]: TDataSource } = {
         port: 3306,
         entities: [],
         seeds: [],
+        synchronize: false,
+        logging: true,
     },
     db2: {
         username: process.env.DB_USERNAME,
@@ -27,6 +29,8 @@ export const db: { [index: string]: TDataSource } = {
         port: 3306,
         entities: [],
         seeds: [],
+        synchronize: false,
+        logging: true,
     },
 };
 export default db;
