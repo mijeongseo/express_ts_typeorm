@@ -1,1 +1,2 @@
-export * as database from './database.config';
+import db from './database.config';
+export const database = db;

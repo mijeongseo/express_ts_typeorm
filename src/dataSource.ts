@@ -1,20 +1,11 @@
-import { DataSource, DataSourceOptions } from 'typeorm';
-import { SeederOptions } from 'typeorm-extension';
-import path from 'path';
+import { DataSource } from 'typeorm';
 import { database } from './config';
-
-const entities = [path.join(__dirname + '/entities/*.{ts,js}'), path.join(__dirname + '/entities/*.{ts,js}')];
+import type { TDataSource } from './config/database.config';
 
 const setDataSources = () => {
     const dataSources = Object.values(database).map((db, idx) => {
-        // console.log(db);
-        const options: DataSourceOptions & SeederOptions = {
+        const options: TDataSource = {
             ...db,
-            name: 'default',
-            type: 'mysql',
-            port: 3306,
-            // entities: [...entities[idx]],
-            // seeds: ['database/seeds/*.ts'],
             logging: true,
             synchronize: false,
         };
@@ -27,3 +18,18 @@ const setDataSources = () => {
 const dataSources = setDataSources();
 
 export default dataSources;
+
+export const initializeDatabase = async () => {
+    await Promise.all(
+        dataSources.map(async (dataSource, idx) => {
+            await dataSource
+                .initialize()
+                .then(() => {
+                    console.log(`Data Source ${idx + 1} has been initialized!`);
+                })
+                .catch((err) => {
+                    console.error(`Error during Data Source ${idx + 1} initialization:`, err);
+                });
+        })
+    );
+};
