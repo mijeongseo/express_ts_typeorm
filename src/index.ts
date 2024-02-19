@@ -7,6 +7,7 @@ import routes from '@routes/index';
 import { initializeDatabase } from './libs/dataSource';
 import { stream } from '@libs/logger';
 import cors from 'cors';
+import path from 'path';
 
 const app: Express = express();
 
@@ -14,6 +15,7 @@ const app: Express = express();
 미들웨어 설정
 */
 {
+    app.use('/public', express.static(path.join(process.cwd(), 'public')));
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.use(hpp());
