@@ -12,4 +12,15 @@ router.get('/', async (req: Request, res: Response, next) => {
     }
 });
 
+router.post('/error', async (req: Request, res: Response, next) => {
+    try {
+        const error = new Error('테스트 에러');
+        error.code = 'TestError';
+        error.status = 400;
+        throw error;
+    } catch (error) {
+        next(error);
+    }
+});
+
 export default router;

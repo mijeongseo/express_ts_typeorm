@@ -20,6 +20,9 @@
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
   },
+  "ts-node": {
+    "files": true,
+  },
   "include": [
     "src"
   ]

@@ -63,7 +63,7 @@ API 오류 핸들링
     app.all('*', (_, res: Response) => {
         res.status(404).send('Not Found');
     });
-    app.use((error: Error, req: Request, res: Response) => {
+    app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
         console.error(error);
         res.status(error.status || 500);
         res.json({ code: error.code || 'InvalidRequest', message: error.message || '요청 실패' });
