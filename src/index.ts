@@ -66,6 +66,6 @@ API 오류 핸들링
     app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
         console.error(error);
         res.status(error.status || 500);
-        res.json({ code: error.code || 'InvalidRequest', message: error.message || '요청 실패' });
+        res.json({ ...error, code: error.code || 'InvalidRequest', message: error.message || '요청 실패' });
     });
 }
