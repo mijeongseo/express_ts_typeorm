@@ -10,10 +10,12 @@ export const db: TDataSource = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE_1,
     host: process.env.DB_HOST,
-    name: 'db1',
+    name: 'default',
     type: 'mysql',
     port: 3306,
     entities: [],
     seeds: [],
+    synchronize: false,
+    logging: true,
 };
 export default db;
