@@ -5,8 +5,8 @@
 ## 개발 환경
 
 -   Framework : Express.js (+typescript)
--   Orm : Typerom
--   Database : Mysql
+-   Orm : TypeORM
+-   Database : MySQL
 
 ## 시작하기
 
@@ -24,7 +24,8 @@
 DB_PASSWORD=DB 패스워드
 DB_USERNAME=root
 DB_HOST=localhost
-DB_DATABASE=DB 이름
+DB_DATABASE_1=DB1 이름
+DB_DATABASE_2=DB2 이름
 ```
 
 ### 서버 실행
