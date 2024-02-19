@@ -2,6 +2,9 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
+            "@libs/*": [
+                "src/libs/*"
+            ],
             "@routes/*": [
                 "src/routes/*"
             ]
